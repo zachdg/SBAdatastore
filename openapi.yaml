@@ -1,0 +1,143 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Car Pooling API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: customers
+  description: Customer submitted requests
+- name: drivers and management
+  description: Reports submitted by drivers
+
+paths:
+  /request:
+    get:
+      summary: retrieves a request submission
+      operationId: app.get_ride_request
+      description: By passing in the appropriate values, you can search for and available request in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: startDate
+        description: pass in a start date for looking up request submissions
+        required: true
+        type: string
+        format: date-time
+      - in: query
+        name: endDate
+        description: pass in an end date for looking up request submissions
+        required: true
+        type: string
+        format: date-time
+      responses:
+        200:
+          description: search results matching the criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RequestInfo'
+        400:
+          description: bad input parameter
+
+  /report:
+    get:
+      summary: gets a ride report
+      operationId: app.get_ride_report
+      description: By passing in the appropriate values, you can search for an available report in the system
+      produces:
+        - application/json
+      parameters:
+      - in: query
+        name: startDate
+        description: pass in a start date for looking up reports
+        required: true
+        type: string
+        format: date-time
+      - in: query
+        name: endDate
+        description: pass in an end date for looking up reports
+        required: true
+        type: string
+        format: date-time
+      responses:
+        200:
+          description: search results matching the criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReportInfo'
+        400:
+          description: bad input parameter
+
+definitions:
+  RequestInfo:
+    type: object
+    required:
+    - name
+    - location
+    - destination
+    - time
+    - notes
+    properties:
+      name:
+        type: string
+        example: Mike Tyson
+      location:
+        type: string
+        example: 12354 101b Avenue
+      destination:
+        type: string
+        example: McDonalds, 223rd St
+      time:
+        type: string
+        example: '15:00'
+      notes:
+        type: string
+        example: The house with the blue mailbox
+  ReportInfo:
+    type: object
+    required:
+    - name
+    - customer
+    - pickup
+    - dropoff
+    - pickuptime
+    - dropofftime
+    - rating
+    - notes
+    properties:
+      name:
+        type: string
+        example: Driver Driverson
+      customer:
+        type: string
+        example: Geddy Lee
+      pickup:
+        type: string
+        example: 2240 122nd St
+      dropoff:
+        type: string
+        example: Chuck-e-Cheese, 278th St
+      pickuptime:
+        type: string
+        example: '13:30'
+      dropofftime:
+        type: string
+        example: '14:15'
+      rating:
+        type: string
+        example: '4/5'
+      notes:
+        type: string
+        example: 'Polite and considerate customer'
+
