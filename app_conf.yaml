@@ -2,10 +2,10 @@ version: 1
 datastore:
   user: root
   password: password
-  hostname: localhost
+  hostname: ec2-52-36-5-246.us-west-2.compute.amazonaws.com
   port: 3306
   db: rides
 kafka:
-  server: 127.0.0.1
+  server: ec2-52-36-5-246.us-west-2.compute.amazonaws.com
   port: 9092
   topic: events
