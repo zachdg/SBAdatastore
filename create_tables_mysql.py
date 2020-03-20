@@ -1,6 +1,12 @@
 import mysql.connector
 
-db_conn = mysql.connector.connect(host="ec2-52-36-5-246.us-west-2.compute.amazonaws.com", user="root", password="password", database="rides")
+# conn = mysql.connector.connect(host="ec2-52-36-5-246.us-west-2.compute.amazonaws.com", user="root", password="password")
+# c = conn.cursor()
+# c.execute("CREATE DATABASE rides")
+# conn.commit()
+# conn.close()
+
+db_conn = mysql.connector.connect(host="ec2-52-36-5-246.us-west-2.compute.amazonaws.com", user="user", password="password", database="rides")
 
 db_cursor = db_conn.cursor()
 
