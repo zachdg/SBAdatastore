@@ -58,7 +58,7 @@ def get_ride_request(startDate, endDate):
 
     results = []
 
-    results = session.query(Request).filter(Request.date_created >= datetime.fromisoformat(startDate), Request.date_created <= datetime.fromisoformat(endDate))
+    results = session.query(Request).filter(Request.date_created >= startDate, Request.date_created <=endDate)
 
     for result in results:
         results_list.append(result.to_dict())
@@ -116,13 +116,15 @@ def process_messages():
         msg_str = msg.value.decode('utf-8')
         msg = json.loads(msg_str)
 
+
         if msg['type'] == 'request':
+            print("what is this", msg['payload'])
             session = DB_SESSION()
-            rq = Request(msg['name'],
-                         msg['location'],
-                         msg['destination'],
-                         msg['time'],
-                         msg['notes'])
+            rq = Request(msg['payload']['name'],
+                         msg['payload']['location'],
+                         msg['payload']['destination'],
+                         msg['payload']['time'],
+                         msg['payload']['notes'])
 
             session.add(rq)
 
@@ -131,14 +133,14 @@ def process_messages():
 
         elif msg['type'] == 'report':
             session = DB_SESSION()
-            rp = Report(msg['name'],
-                        msg['customer'],
-                        msg['pickup'],
-                        msg['dropoff'],
-                        msg['pickuptime'],
-                        msg['dropofftime'],
-                        msg['rating'],
-                        msg['notes'])
+            rp = Report(msg['payload']['name'],
+                        msg['payload']['customer'],
+                        msg['payload']['pickup'],
+                        msg['payload']['dropoff'],
+                        msg['payload']['pickuptime'],
+                        msg['payload']['dropofftime'],
+                        msg['payload']['rating'],
+                        msg['payload']['notes'])
 
             session.add(rp)
 
