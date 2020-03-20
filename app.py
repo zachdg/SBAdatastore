@@ -58,7 +58,7 @@ def get_ride_request(startDate, endDate):
 
     results = []
 
-    results = session.query(Request).filter(Request.date_created >= datetime.fromisoformat(startDate), Request.date_created <= datetime.fromisoformat(endDate))
+    results = session.query(Request).filter(Request.date_created >= startDate, Request.date_created <=endDate)
 
     for result in results:
         results_list.append(result.to_dict())
