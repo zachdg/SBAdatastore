@@ -6,7 +6,7 @@ import mysql.connector
 # conn.commit()
 # conn.close()
 
-db_conn = mysql.connector.connect(host="ec2-52-36-5-246.us-west-2.compute.amazonaws.com", user="user", password="password", database="rides")
+db_conn = mysql.connector.connect(host="ec2-34-223-239-244.us-west-2.compute.amazonaws.com", user="user", password="password", database="rides")
 
 db_cursor = db_conn.cursor()
 

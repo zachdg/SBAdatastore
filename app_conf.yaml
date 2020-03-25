@@ -2,7 +2,7 @@ version: 1
 datastore:
   user: user
   password: password
-  hostname: ec2-52-36-5-246.us-west-2.compute.amazonaws.com
+  hostname: ec2-34-223-239-244.us-west-2.compute.amazonaws.com
   port: 3306
   db: rides
 kafka:
