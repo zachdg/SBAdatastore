@@ -13,8 +13,13 @@ from threading import Thread
 import json
 from pykafka import KafkaClient
 
-with open('app_conf.yaml', 'r') as f:
-    app_config = yaml.safe_load(f.read())
+try:
+    with open('/config/app_conf.yaml', 'r') as f:
+        app_config = yaml.safe_load(f.read())
+
+except FileNotFoundError:
+    with open('app_conf.yaml', 'r') as f:
+        app_config = yaml.safe_load(f.read())
 
 
 DB_ENGINE = create_engine('mysql+pymysql://{}:{}@{}:{}/{}'.format(
